@@ -17,13 +17,14 @@
 ### END INIT INFO
 
 USER=pi
-export DISPLAY=:0    
+export DISPLAY=:0
 LOG=/var/log/hsbot.log
 
 case "$1" in
 
 start)
     echo "Starting HSBot.."
+    sleep 10
     xset s off         # don't activate screensaver
     xset -dpms         # disable DPMS (Energy Star) features.
     xset s noblank     # don't blank the video device
@@ -31,15 +32,15 @@ start)
     touch $LOG
     echo "" >> $LOG
     echo "HSBot start: "$(date) >> $LOG
-    
-    su -l $USER -c "cd /home/pi/HSBot2; ./hsbot.py >> $LOG &"
+
+    sleep 5
+    su -l $USER -c "cd /home/pi/HSBot2; ./hsbot.py 2>> $LOG &"
     echo "Logging to "$LOG
 ;;
 
 stop)
-    echo "Stopping HSBot.."
+    echo "Stopping homeBot.."
     killall hsbot.py
-    pkill .py
     sleep 2
     echo "" >> $LOG
     echo "HSBot stop: "$(date) >> $LOG
