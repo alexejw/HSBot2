@@ -266,7 +266,10 @@ def setTopic(tpc):
 # schliebs ne nachricht über mqtt topic debug
 def debugMsg(msg,fkt='DEBUG-BOT'):
 	pl = "["+str(fkt)+"]: "+str(msg)
-	mospub.single(c.MQTTDEBU, payload=pl, hostname=c.MQTTSRV)
+	if c.DEBUG >= 2:
+		print(pl)
+	if c.DEBUG >= 1:
+		mospub.single(c.MQTTDEBU, payload=pl, hostname=c.MQTTSRV)
 
 #mosquito Klasse
 class MQTT():
@@ -327,7 +330,7 @@ class Jabber(sleekxmpp.ClientXMPP):
 		self.newSession()
 		sleep(10)
 		vers = open('version.txt').read()
-		self.sendTo("[STATUS] Reboot erfolgreich... (HSBot "+vers+")")
+		self.sendTo("[STATUS] Reboot erfolgreich... (HSBot "+vers[:-1]+")")
 		
 		while True:
 			sleep(30)

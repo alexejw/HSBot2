@@ -39,7 +39,7 @@ start)
 ;;
 
 stop)
-    echo "Stopping homeBot.."
+    echo "Stopping HSBot.."
     killall hsbot.py
     sleep 2
     echo "" >> $LOG
